@@ -1,13 +1,13 @@
 
- let budgetList = [];
+ var budgetList = [];
 
 
  function addBudgetItem() {
-   const budgetItemInput = document.getElementById("budgetItemInput");
-   const priceInput = document.getElementById("priceInput");
+   var budgetItemInput = document.getElementById("budgetItemInput");
+   var priceInput = document.getElementById("priceInput");
 
-   const budgetItem = budgetItemInput.value.trim();
-   const price = parseFloat(priceInput.value.trim());
+   var budgetItem = budgetItemInput.value.trim();
+   var price = parseFloat(priceInput.value.trim());
 
   
    if (budgetItem === "" || isNaN(price) || price <= 0) {
@@ -16,7 +16,7 @@
    }
 
   
-   const newItem = { budgetItem, price };
+   var newItem = { budgetItem, price };
 
   
    budgetList.push(newItem);
@@ -31,11 +31,11 @@
 
 
  function displayBudgetList() {
-   const budgetListElement = document.getElementById("budgetList");
+   var budgetListElement = document.getElementById("budgetList");
    budgetListElement.innerHTML = "";
 
    budgetList.forEach((item, index) => {
-     const listItem = document.createElement("li");
+     var listItem = document.createElement("li");
      listItem.innerHTML = `
        <span>${item.budgetItem} - #${item.price}</span>
        <button onclick="editBudgetItem(${index})">Edit</button>
@@ -48,8 +48,8 @@
 
 
  function editBudgetItem(index) {
-   const budgetItem = prompt("Enter the updated budget item:");
-   const price = parseFloat(prompt("Enter the updated price:"));
+   var budgetItem = prompt("Enter the updated budget item:");
+   var price = parseFloat(prompt("Enter the updated price:"));
 
  
    if (isNaN(price) || price <= 0) {
