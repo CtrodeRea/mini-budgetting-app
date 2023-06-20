@@ -37,7 +37,7 @@
    budgetList.forEach((item, index) => {
      const listItem = document.createElement("li");
      listItem.innerHTML = `
-       <span>${item.budgetItem} - $${item.price}</span>
+       <span>${item.budgetItem} - #${item.price}</span>
        <button onclick="editBudgetItem(${index})">Edit</button>
        <button onclick="deleteBudgetItem(${index})">Delete</button>
      `;
