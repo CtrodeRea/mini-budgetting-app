@@ -1,74 +1,66 @@
+   
+ var foodArr =[];
+ var editedIndex = 0;
 
- var budgetList = [];
+function addFood (){
+    // var nameOfFood = document.getElementById("foodName");
+    var nameOfFood = foodName.value;
+    var foodQty1 = document.getElementById("foodQty").value;
+    // var foodAmount = document.getElementById("foodPrice"); 
+    var foodAmount = foodPrice.value;
+    // var style1 =  document.getElementById("show");
+    // style1.style.display = "none";
 
+//   console.log(nameOfFood, foodAmount, foodQty);
+if (nameOfFood !== "" && foodQty !== "" && foodAmount !== ""){
+let addItemObj = {
+    food1 : foodName.value, 
+    qty1 : foodQty.value,
+    price1 : foodPrice.value 
+}
+foodArr.push(addItemObj);
+// console.log(foodArr)
 
- function addBudgetItem() {
-   var budgetItemInput = document.getElementById("budgetItemInput");
-   var priceInput = document.getElementById("priceInput");
-
-   var budgetItem = budgetItemInput.value.trim();
-   var price = parseFloat(priceInput.value.trim());
-
-  
-   if (budgetItem === "" || isNaN(price) || price <= 0) {
-     alert("Invalid budget item or price. Please enter valid values.");
-     return;
-   }
-
-  
-   var newItem = { budgetItem, price };
-
-  
-   budgetList.push(newItem);
-
-  
-   budgetItemInput.value = "";
-   priceInput.value = "";
-
-  
-   displayBudgetList();
- }
-
-
- function displayBudgetList() {
-   var budgetListElement = document.getElementById("budgetList");
-   budgetListElement.innerHTML = "";
-
-   budgetList.forEach((item, index) => {
-     var listItem = document.createElement("li");
-     listItem.innerHTML = `
-       <span>${item.budgetItem} - #${item.price}</span>
-       <button onclick="editBudgetItem(${index})">Edit</button>
-       <button onclick="deleteBudgetItem(${index})">Delete</button>
-     `;
-
-     budgetListElement.appendChild(listItem);
-   });
- }
-
-
- function editBudgetItem(index) {
-   var budgetItem = prompt("Enter the updated budget item:");
-   var price = parseFloat(prompt("Enter the updated price:"));
-
+}
+  displayFoodArr();
+}
  
-   if (isNaN(price) || price <= 0) {
-     alert("Invalid price. Please enter a valid positive number.");
-     return;
-   }
 
-  
-   budgetList[index].budgetItem = budgetItem;
-   budgetList[index].price = price;
+function displayFoodArr(){
+    show.innerHTML = "";
+    let sum = 0;
+    for (var i=0; i<foodArr.length; i++){
+        var total = Number(`${parseInt(foodArr[i].qty1) * parseInt(foodArr[i].price1)}`);
+        show.innerHTML +=`
+        <tr>
+        <td>${i + 1}</td>
+            <td> ${foodArr[i].food1}</td>
+            <td>${foodArr[i].qty1} </td>
+            <td>${foodArr[i].price1} </td>
+            <td> #${total}</td>
+            <td><button onclick="editItem(${i})" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
+                <button onclick="deleteItem(${i})">Delete</button>
+                </td>
+            </tr>
+            `
+            sum += total
+                totalPrice.innerHTML = `Total Price: #${sum}`;            
+        }
+}
+function editItem(index){
+    editedIndex = index;
+}
+function deleteItem(index) {
+    foodArr.splice(index, 1)
+    displayFoodArr();
 
- 
-   displayBudgetList();
- }
-
- 
- function deleteBudgetItem(index) {
-   budgetList.splice(index, 1);
-
- 
-   displayBudgetList();
- }
+}
+function update(){
+    var updateObj ={
+        food1 : editedName.value,
+        qty1 : editedQty.value,
+        price1 : editedPrice.value
+    }
+foodArr.splice(editedIndex, 1, updateObj);
+displayFoodArr();
+}

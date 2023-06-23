@@ -2,30 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-</head>
-<body class="bg-body-tertiary">
-    <div class="container col-lg-7 col-md-7 col-11 shadow-sm mt-lg-5 mt-5">
-
-        <h1>Mini Budgeting App</h1>
-
-        <input type="text" id="budgetItemInput" placeholder="Enter budget item" class="form-control py-2"><br>
-        <input type="number" id="priceInput" placeholder="Enter price" class="form-control py-2"><br>
-        <button  class="btn btn-dark w-100 py-2"  onclick="addBudgetItem()">Add Budget Item</button>
-         </div>
-         <div class="container col-lg-7 col-md-7 col-11 shadow-sm mt-lg-5 mt-5">
-            <ul id="budgetList"></ul>
-         </div>
-       
       
-       
-    
-    <script src="script.js"></script>
+</head>
+<body>
+     <!-- A budget app to collect food-items, quantity and price. perform CRUD operation. total the price. show the food-item, quantity, price, & total price. -->
+    <div>
+        <label for="foodName">Name of Food:</label>
+        <input type="text" id="foodName" name="foodName" >
+        <label for="foodQty">Quantity:</label>
+        <input type="text" id="foodQty" name="foodQty">
+        <label for="foodPrice">Food Price:</label>
+        <input type="text" id="foodPrice" name="foodPrice">
+        <button onclick="addFood()">Submit</button>
+    </div>
+    <div  style="display: block;">
+    <table border="2" style="border-collapse: collapse;"   >
+<tr>
+    <th>S/N</th>
+    <th>Food Name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Total Price</th>
+    <th>Action</th>
+</tr>
+     <tbody id="show">
+
+     </tbody>
+    </table>
+</div>
+<div id="totalPrice"> </div>
    
+
+<!-- Button trigger modal -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <label for="editedName">Name of Food:</label><br>
+            <input type="text" id="editedName" name="editedName"><br>
+            <label for="editedQty">Quantity:</label><br>
+            <input type="text" id="editedQty" name="editedQty"><br>
+            <label for="editedPrice">Food Price:</label><br>
+            <input type="text" id="editedPrice" name="editedPrice"><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="update()">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
