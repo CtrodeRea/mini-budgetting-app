@@ -4,66 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-      
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+rel="stylesheet"
+/>
+<!-- MDB -->
+<script defer async
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
+></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alatsi&display=swap" rel="stylesheet">
 </head>
-<body>
-     <!-- A budget app to collect food-items, quantity and price. perform CRUD operation. total the price. show the food-item, quantity, price, & total price. -->
-    <div>
-        <label for="foodName">Name of Food:</label>
-        <input type="text" id="foodName" name="foodName" >
-        <label for="foodQty">Quantity:</label>
-        <input type="text" id="foodQty" name="foodQty">
-        <label for="foodPrice">Food Price:</label>
-        <input type="text" id="foodPrice" name="foodPrice">
-        <button onclick="addFood()">Submit</button>
-    </div>
-    <div  style="display: block;">
-    <table border="2" style="border-collapse: collapse;"   >
-<tr>
-    <th>S/N</th>
-    <th>Food Name</th>
-    <th>Quantity</th>
-    <th>Price</th>
-    <th>Total Price</th>
-    <th>Action</th>
-</tr>
-     <tbody id="show">
-
-     </tbody>
-    </table>
-</div>
-<div id="totalPrice"> </div>
-   
-
-<!-- Button trigger modal -->
+<body class="centered-wrapper">
+    <main class="centered-content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container">
+            <a class="navbar-brand me-2" href="https://mdbgo.com/">
+                <img
+                  src="/ctrode.png"
+                  height="60"
+                  alt=" Logo"
+                  loading="lazy"
+                  style="margin-top: -1px;"
+                />
+              </a>
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarCenteredExample"
+            aria-controls="navbarCenteredExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+      
+          <!-- Collapsible wrapper -->
+          <div
+            class="collapse navbar-collapse justify-content-center"
+            id="navbarCenteredExample"
+          >
+            <!-- Left links -->
+            <ul class=" navbar-nav mb-2 mb-lg-0 p-2 ">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">OUR WORK</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link active"
+                  >ABOUT US</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active"
+                  >TEAM</a
+                >
+              </li>
+            </ul>
+            <!-- Left links -->
+          </div>
+          <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <section class="shadow-sm bg-light">
+    <div class="container-fluid mx-auto pt-5 w-50">
+                <h1>Mini Budget App</h1>
+                <h2> Handle Your Money Wisely</h2>
+                <p>An online service with which you will get rid of chaos <br> in budgeting and getting more flexibility with your money</p>
+        
+            <div class="form-outline my-3 ">
+                <input type="text" class="form-control form-control-lg" id="itemName">
+                <label for="itemName" class="form-label">Enter item name</label>
+            </div>
+            <div class="form-outline my-3 ">
+                <input type="number" class="form-control form-control-lg" id="itemQty">
+                <label for="itemQty" class="form-label">Enter item quantity</label>
+            </div>
+            <div class="form-outline my-3">
+                <input type="number" class="form-control form-control-lg" id="itemCost">
+                <label for="itemCost" class="form-label">Enter item cost</label>
+            </div>
+            <button class="btn btn-dark w-100 p-3" onclick="addItem()" style="background: rgb(111,111,111);
+            background: linear-gradient(90deg, rgba(111,111,111,1) 0%, rgba(31,99,112,1) 4%, rgba(29,99,112,1) 88%, rgba(0,94,113,1) 100%);">Add Item <i class="fa-solid fa-cart-plus"></i></button>
+        </div>
+            <table class="mt-5 table table-striped table-bordered w-75 mx-auto" id="itemTable">
+            </table>
+            <div id="totalCost" class="mx-auto w-50"></div>
   
   <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-mdb-backdrop="static"
+    data-mdb-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="staticBackdropLabel">Update Item</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <label for="editedName">Name of Food:</label><br>
-            <input type="text" id="editedName" name="editedName"><br>
-            <label for="editedQty">Quantity:</label><br>
-            <input type="text" id="editedQty" name="editedQty"><br>
-            <label for="editedPrice">Food Price:</label><br>
-            <input type="text" id="editedPrice" name="editedPrice"><br>
+            <div class="form-outline my-3">
+                <input type="text" id="editName" class="form-control" />
+                <label class="form-label" for="editName">Enter item name</label>
+              </div>
+              <div class="form-outline my-3">
+                <input type="text" id="editQty" class="form-control" />
+                <label class="form-label" for="editQty">
+                    Enter item quantity
+                </label>
+              </div>
+              <div class="form-outline my-3">
+                <input type="text" id="editCost" class="form-control" />
+                <label class="form-label" for="editCost">Enter item cost</label>
+              </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="update()">Understood</button>
+          <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="update()">Update List</button>
         </div>
       </div>
     </div>
   </div>
-
-    <script src="script.js"></script>
+</section>
+    <script src="script.js">
+    </script>
+    </main>
 </body>
 </html>

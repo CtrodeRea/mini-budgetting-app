@@ -1,66 +1,78 @@
    
- var foodArr =[];
+ var itemArr =[];
  var editedIndex = 0;
 
-function addFood (){
-    // var nameOfFood = document.getElementById("foodName");
-    var nameOfFood = foodName.value;
-    var foodQty1 = document.getElementById("foodQty").value;
-    // var foodAmount = document.getElementById("foodPrice"); 
-    var foodAmount = foodPrice.value;
+function addItem (){
+    var nameOfFood = itemName.value;
+    var foodQty = itemQty.value; 
+    var foodAmount = itemCost.value;
     // var style1 =  document.getElementById("show");
     // style1.style.display = "none";
 
-//   console.log(nameOfFood, foodAmount, foodQty);
+  console.log(nameOfFood, foodAmount, foodQty);
+
 if (nameOfFood !== "" && foodQty !== "" && foodAmount !== ""){
-let addItemObj = {
-    food1 : foodName.value, 
-    qty1 : foodQty.value,
-    price1 : foodPrice.value 
+var addItemObj = {
+    foodName : itemName.value, 
+    qty : itemQty.value,
+    cost : itemCost.value 
 }
-foodArr.push(addItemObj);
-// console.log(foodArr)
+itemArr.push(addItemObj);
+console.log(itemArr)
 
 }
-  displayFoodArr();
+  displayItemArr();
 }
- 
 
-function displayFoodArr(){
-    show.innerHTML = "";
-    let sum = 0;
-    for (var i=0; i<foodArr.length; i++){
-        var total = Number(`${parseInt(foodArr[i].qty1) * parseInt(foodArr[i].price1)}`);
-        show.innerHTML +=`
+function displayItemArr(){
+    
+    itemTable.innerHTML = `<tr>
+    <th>S/N</th>
+    <th>Item Name</th>
+    <th>Item Quantity</th>
+    <th>Item Cost</th>
+    <th> Total Cost</th>
+    <th>Edit Info</th>
+  </tr>
+`;let sum = 0;
+    
+    for (var i=0; i<itemArr.length; i++){
+        var total = Number(`${parseInt(itemArr[i].qty) * parseInt(itemArr[i].cost)}`);
+        itemTable.innerHTML +=`
+
         <tr>
         <td>${i + 1}</td>
-            <td> ${foodArr[i].food1}</td>
-            <td>${foodArr[i].qty1} </td>
-            <td>${foodArr[i].price1} </td>
+            <td> ${itemArr[i].foodName}</td>
+            <td>${itemArr[i].qty} </td>
+            <td>${itemArr[i].cost} </td>
             <td> #${total}</td>
-            <td><button onclick="editItem(${i})" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
-                <button onclick="deleteItem(${i})">Delete</button>
+            <td><button onclick="editItem(${i})" type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#staticBackdrop" ><i class="fa-regular fa-pen-to-square"></i> </button>
+                <button class="btn btn-danger" onclick="deleteItem(${i})"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>
             `
             sum += total
-                totalPrice.innerHTML = `Total Price: #${sum}`;            
+                totalCost.innerHTML = `<h1>Total Item Cost: #${sum}</h1>`;            
         }
 }
 function editItem(index){
     editedIndex = index;
+     editName.value = itemArr[index].foodName
+       editQty.value = itemArr[index].qty
+         editCost.value = itemArr[index].cost
+
 }
 function deleteItem(index) {
-    foodArr.splice(index, 1)
-    displayFoodArr();
+    itemArr.splice(index, 1)
+    displayItemArr();
 
 }
 function update(){
     var updateObj ={
-        food1 : editedName.value,
-        qty1 : editedQty.value,
-        price1 : editedPrice.value
+        foodName : editName.value,
+        qty : editQty.value,
+        cost : editCost.value
     }
-foodArr.splice(editedIndex, 1, updateObj);
-displayFoodArr();
+itemArr.splice(editedIndex, 1, updateObj);
+displayItemArr();
 }
